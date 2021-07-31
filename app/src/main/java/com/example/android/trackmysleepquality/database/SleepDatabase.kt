@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [SleepNight::class], version = 1, exportSchema = false)
 abstract class SleepDatabase : RoomDatabase() {
+
     abstract val sleepDatabaseDao: SleepDatabaseDao
 
     companion object {
@@ -24,6 +25,7 @@ abstract class SleepDatabase : RoomDatabase() {
                     )
                         .fallbackToDestructiveMigration()
                         .build()
+                    INSTANCE = instance
                 }
                 return instance
             }
