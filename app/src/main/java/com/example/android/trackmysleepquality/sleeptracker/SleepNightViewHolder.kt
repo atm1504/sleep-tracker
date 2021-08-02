@@ -1,6 +1,8 @@
 package com.example.android.trackmysleepquality.sleeptracker
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -30,5 +32,15 @@ class SleepNightViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 else -> R.drawable.ic_launcher_sleep_tracker_foreground
             }
         )
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): SleepNightViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val view = layoutInflater
+                .inflate(R.layout.list_item_sleep_night, parent, false)
+
+            return SleepNightViewHolder(view)
+        }
     }
 }
