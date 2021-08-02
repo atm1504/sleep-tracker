@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.android.trackmysleepquality.database.SleepNight
 
-class SleepNightAdapter : ListAdapter<SleepNight, SleepNightViewHolder>(SleepNightDiffCallback()) {
+class SleepNightAdapter(val clickListener: SleepNightListener)  : ListAdapter<SleepNight, SleepNightViewHolder>(SleepNightDiffCallback()) {
 
 //    var data = listOf<SleepNight>()
 //        set(value) {
@@ -16,7 +16,7 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightViewHolder>(SleepNig
 
     override fun onBindViewHolder(holder: SleepNightViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(clickListener,item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SleepNightViewHolder {
@@ -27,4 +27,8 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightViewHolder>(SleepNig
 //        return SleepNightViewHolder(view)
         return SleepNightViewHolder.from(parent)
     }
+}
+
+class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
+    fun onClick(night: SleepNight) = clickListener(night.nightId)
 }

@@ -10,8 +10,9 @@ import com.example.android.trackmysleepquality.databinding.ListItemSleepNightBin
 class SleepNightViewHolder private constructor(val binding: ListItemSleepNightBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: SleepNight) {
-        binding.sleep=item
+    fun bind(clickListener: SleepNightListener, item: SleepNight) {
+        binding.sleep = item
+        binding.clickListener = clickListener
         binding.executePendingBindings()
 //        val res = itemView.context.resources
 //

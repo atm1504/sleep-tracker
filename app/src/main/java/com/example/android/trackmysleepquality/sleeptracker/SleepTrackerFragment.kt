@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -77,10 +78,12 @@ class SleepTrackerFragment : Fragment() {
                 sleepTrackerViewModel.doneShowingSnackbar()
             }
         })
-        val manager = GridLayoutManager(activity,3)
-        val adapter = SleepNightAdapter()
+        val manager = GridLayoutManager(activity, 3)
+        val adapter = SleepNightAdapter(SleepNightListener { nightId ->
+            Toast.makeText(context, "${nightId}", Toast.LENGTH_SHORT).show()
+        })
         binding.sleepList.adapter = adapter
-        binding.sleepList.layoutManager=manager
+        binding.sleepList.layoutManager = manager
         sleepTrackerViewModel.nights.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
